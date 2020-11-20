@@ -2,10 +2,37 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-6 text-fairy py-5 my-5">
-            <?=$fairy->text;?>
+            <?php
+
+            $mother = "goat";
+            $enemy = "wolf";
+            $location = "wood";
+            $detail = "seven";
+            $obj = "tree";
+            $season = "not";
+
+            $character1 = R::findOne("characters","fairy = ? and role = ? and name LIKE '%".$mother."%'",[$fairy->id,"mother"]);
+            $character2 = R::findOne("characters","fairy = ? and role = ? and name LIKE '%".$enemy."%'",[$fairy->id,"enemy"]);
+            $kids = R::findOne("detail","fairy = ? and text LIKE '%".$detail."%'",[$fairy->id]);
+            $location = R::findOne("locations","fairy = ? and name LIKE '%".$location."%'",[$fairy->id]);
+            $obj = R::findOne("object","fairy = ? and location = ? and name LIKE '%".$obj."%'",[$fairy->id,$location->id]);
+            $season = R::findOne("season","fairy = ? and detail = ? and name LIKE '%".$season."%'",[$fairy->id,$kids->id]);
+
+
+            $fairy_text = $fairy->text;
+            $fairy_text = str_replace("TEMP_CHARACTER_MOTHER",$character1->name,$fairy_text);
+            $fairy_text = str_replace("TEMP_CHARACTER_ENEMY",$character2->name,$fairy_text);
+            $fairy_text = str_replace("TEMP_DETAIL",$kids->text,$fairy_text);
+            $fairy_text = str_replace("TEMP_LOCATION",$location->name,$fairy_text);
+            $fairy_text = str_replace("TEMP_SEAS",$season->name,$fairy_text);
+            $fairy_text = str_replace("TEMP_OBJ",$obj->name,$fairy_text);
+
+
+            echo $fairy_text;
+            ?>
         </div>
         <div class="col-md-2">
-
+            <?php include_once "templates/panel.phtml"; ?>
         </div>
         <div class="col-md-2"></div>
     </div>
