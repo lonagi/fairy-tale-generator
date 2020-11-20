@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <?php include "templates/meta.phtml"; ?>
+    <?php
+        include_once "php/db.php";
+        include "templates/meta.phtml";
+    ?>
 </head>
 <body>
     <?php
@@ -18,7 +21,12 @@
     </div>
 
     <?php
-        include_once "templates/content.phtml";
+        if(isset($_GET['fairy'])) {
+            $fairy = R::exec("SELECT * from fairies where name LIKE '%".$_GET['fairy']."%'");
+            if($fairy) {
+                include_once "templates/content.phtml";
+            }
+        }
     ?>
 </body>
 </html>
