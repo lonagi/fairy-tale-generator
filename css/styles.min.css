@@ -1,0 +1,16 @@
+.bg-main {
+    height: 95vh;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-image: url("../img/bg.jpg");
+    -o-background-image: url("../img/bg.jpg");
+    -moz-background-image: url("../mg/bg.jpg");
+    -webkit-background-image: url("../img/bg.jpg");
+
+    background-image: url("../img/bg.webp");
+    -o-background-image: url("../img/bg.webp");
+    -moz-background-image: url("../mg/bg.webp");
+    -webkit-background-image: url("../img/bg.webp");
+    filter: brightness(0.8);
+}
