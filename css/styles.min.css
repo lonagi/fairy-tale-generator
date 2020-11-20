@@ -32,5 +32,10 @@
 
 .text-fairy span {
     color: red;
-    font-size: 32px;
+    font-weight: bold;
+    font-size: 42px;
+}
+
+.text-fairy .img-fluid {
+    margin: 30px;
 }

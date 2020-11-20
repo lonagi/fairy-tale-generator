@@ -14,7 +14,7 @@
     include_once "templates/navbar.phtml";
     ?>
 
-    <div class="bg-main pt-5">
+    <div class="bg-main pt-5 mt-5">
         <?php
             if(isset($_GET['fairy']) and $fairy)
                 include_once "templates/header.phtml";
