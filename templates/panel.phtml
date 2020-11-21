@@ -13,4 +13,10 @@
         <label class="form-check-label" for="exampleCheck1">Check me out</label>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+</form><div class="mt-5 pt-5">
+    <?php for($i=3;$i<10;$i++): ?>
+        <div class="mt-4">
+            <img src="img/<?=$title.$i;?>.jpg" class="img-thumbnail">
+        </div>
+    <?php endfor; ?>
+</div>
