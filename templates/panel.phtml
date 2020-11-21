@@ -57,6 +57,13 @@
 </form>
 
 <div class="mt-5 pt-5">
+<form class="border border-dark mt-3 p-4" action="?" method="POST">
+    <div class="form-group">
+        <label>New character</label>
+        <input type="text" class="form-control" name="ncar">
+    </div>
+    <button class="btn btn-primary">Create</button>
+</form>
     <?php for($i=3;$i<10;$i++): ?>
         <div class="mt-4">
             <img src="img/<?=$title.$i;?>.jpg" class="img-thumbnail">
