@@ -1,3 +1,5 @@
 <div class="text-center text-light display-2 mytext">
     <?=$fairy->name;?>
+
+    <?php $title = []; foreach(explode(" ",$fairy->name) as $n) array_push($title,strtolower($n[0])); $title=implode("",$title); ?>
 </div>
