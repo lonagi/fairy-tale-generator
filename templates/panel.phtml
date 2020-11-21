@@ -56,7 +56,6 @@
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
-<div class="mt-5 pt-5">
 <form class="border border-dark mt-3 p-4" action="?" method="POST">
     <div class="form-group">
         <label>New character</label>
@@ -64,6 +63,20 @@
     </div>
     <button class="btn btn-primary">Create</button>
 </form>
+
+<form class="border border-dark mt-3 p-4" action="?" method="POST">
+    <div class="form-group">
+        <label>Delete character</label>
+        <select name="dcar" class="form-control">
+            <?php foreach(R::find("characters","fairy = ?",[$fairy->id]) as $c): ?>
+                <option value="<?=$c->id;?>"><?=$c->name;?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+    <button class="btn btn-primary">Delete</button>
+</form>
+
+<div class="mt-5 pt-2">
     <?php for($i=3;$i<10;$i++): ?>
         <div class="mt-4">
             <img src="img/<?=$title.$i;?>.jpg" class="img-thumbnail">
