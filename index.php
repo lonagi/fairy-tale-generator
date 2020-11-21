@@ -7,6 +7,21 @@
         include "templates/meta.phtml";
 
         $fairy = R::findOne("fairies","name LIKE '%".@$_GET['fairy']."%' ",[]);
+
+    if(isset($_POST['ncar'])) {
+        $character = R::dispense("characters");
+        $character->fairy = $fairy->id;
+        $character->name = htmlspecialchars(trim($_POST['ncar']));
+        $character->gender = 1;
+        $character->role = "mother";
+        R::store($character);
+    }
+
+    if(isset($_POST['dcar'])) {
+        $character = R::findOne("characters","id = ?",[$_POST['dcar']]);
+        if($character)
+            R::trash($character);
+    }
     ?>
 </head>
 <body>
