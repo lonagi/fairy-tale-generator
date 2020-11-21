@@ -1,19 +1,62 @@
-<form class="border border-dark p-4">
+<form method="GET" class="border border-dark p-4">
     <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <select name="c1" class="form-control">
+            <?php foreach(R::find("characters","fairy = ? and role = ?",[$fairy->id,"mother"]) as $mother): ?>
+                <option value="<?=$mother->name;?>" <?php if($mother->name=="goat" and !isset($_GET['c1'])) echo 'selected'; ?>><?=$mother->name;?></option>
+            <?php endforeach; ?>
+        </select>
     </div>
+
     <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
+        <select name="c2" class="form-control">
+            <?php foreach(R::find("characters","fairy = ? and role = ?",[$fairy->id,"enemy"]) as $enemy): ?>
+                <option value="<?=$enemy->name;?>" <?php if($enemy->name=="wolf" and !isset($_GET['c2'])) echo 'selected'; ?>><?=$enemy->name;?></option>
+            <?php endforeach; ?>
+        </select>
     </div>
-    <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+
+    <div class="form-group">
+        <select name="d" class="form-control">
+            <?php foreach(R::find("detail","fairy = ?",[$fairy->id]) as $d): ?>
+                <option value="<?=$d->text;?>" <?php if($d->text=="seven" and !isset($_GET['d'])) echo 'selected'; ?>><?=$d->text;?></option>
+            <?php endforeach; ?>
+        </select>
     </div>
+
+    <div class="form-group">
+        <select name="l" class="form-control">
+            <?php foreach(R::find("locations","fairy = ?",[$fairy->id]) as $l): ?>
+                <option value="<?=$l->name;?>" <?php if($l->name=="wood" and !isset($_GET['l'])) echo 'selected'; ?>><?=$l->name;?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+
+    <?php if(isset($_GET['l'])): ?>
+        <div class="form-group">
+            <select name="o" class="form-control">
+                <?php foreach(R::find("object","fairy = ? and location = ?",[$fairy->id,@R::findOne("locations","fairy = ? and name LIKE '%".$_GET['l']."%'",[$fairy->id])->id]) as $o): ?>
+                    <option value="<?=$o->name;?>" <?php if($o->name=="tree" and !isset($_GET['o'])) echo 'selected'; ?>><?=$o->name;?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    <?php endif; ?>
+
+    <?php if(isset($_GET['d'])): ?>
+        <div class="form-group">
+            <select name="s" class="form-control">
+                <?php foreach(R::find("season","fairy = ? and detail = ?",[$fairy->id,@R::findOne("detail","fairy = ? and text LIKE '%".$_GET['d']."%'",[$fairy->id])->id]) as $s): ?>
+                    <option value="<?=$s->name;?>" <?php if($s->name=="you need not be afraid" and !isset($_GET['s'])) echo 'selected'; ?>><?=$s->name;?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    <?php endif; ?>
+
+
+    <input type="hidden" name="fairy" hidden class="hidden" value="<?=@$_GET['fairy'];?>">
     <button type="submit" class="btn btn-primary">Submit</button>
-</form><div class="mt-5 pt-5">
+</form>
+
+<div class="mt-5 pt-5">
     <?php for($i=3;$i<10;$i++): ?>
         <div class="mt-4">
             <img src="img/<?=$title.$i;?>.jpg" class="img-thumbnail">
